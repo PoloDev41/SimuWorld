@@ -5,6 +5,8 @@ view_camera[0] = camera_create_view(-world_width/2, -world_height/2, view_wport[
 
 randomise();
 
+lifetime = 0;
+
 for(i = 0; i < 10; i++)
 {
 	instance_create_layer(random_range(0, world_width),
@@ -12,7 +14,7 @@ for(i = 0; i < 10; i++)
 						"Instances", obj_being);
 }
 
-for(i = 0; i < 2; i++)
+for(i = 0; i < 3; i++)
 {
 
 	instance_create_layer(random_range(0, world_width),

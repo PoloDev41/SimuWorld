@@ -2,9 +2,11 @@ energie--;
 
 if(energie <= 0)
 {
-	instance_create_layer(x,y,"Instances", obj_being,
+	b = instance_create_layer(x,y,"Instances", obj_being,
 	{
-		brain: scr_cloneBrain(parent, true)
+		brain: scr_cloneBrain(parent, true),
 	});
+	b.generation = parent.generation+1;
+	
 	instance_destroy(id);	
 }
