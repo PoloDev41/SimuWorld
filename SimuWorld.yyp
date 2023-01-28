@@ -4,6 +4,7 @@
     {"id":{"name":"spr_living1","path":"sprites/spr_living1/spr_living1.yy",},"order":1,},
     {"id":{"name":"spr_apple","path":"sprites/spr_apple/spr_apple.yy",},"order":0,},
     {"id":{"name":"obj_fruit","path":"objects/obj_fruit/obj_fruit.yy",},"order":2,},
+    {"id":{"name":"scr_genetic","path":"scripts/scr_genetic/scr_genetic.yy",},"order":0,},
     {"id":{"name":"spr_egg1","path":"sprites/spr_egg1/spr_egg1.yy",},"order":2,},
     {"id":{"name":"obj_world","path":"objects/obj_world/obj_world.yy",},"order":0,},
     {"id":{"name":"obj_being","path":"objects/obj_being/obj_being.yy",},"order":1,},
