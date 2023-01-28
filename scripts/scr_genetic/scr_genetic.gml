@@ -1,30 +1,40 @@
 function scr_cloneBrain(parent, withModification){
 	var newBrain = instance_create_layer(0,0,0,obj_brain);
 	
-	for(i = 2; i < array_length(parent.brain.neurons); i++)
-	{
-		parentNeuron = parent.brain.neurons[i];
-		for(j = 0; j < array_length(parentNeuron.source); j++)
+	try{
+		
+		for(i = 2; i < array_length(parent.brain.neurons); i++)
 		{
-			//copy the source
-			if(withModification && irandom(100) < 2)
+			parentNeuron = parent.brain.neurons[i];
+			for(j = 0; j < array_length(parentNeuron.source); j++)
 			{
-				newBrain.neurons[i].source[j] = irandom_range(0,array_length(parent.brain.neurons)-1);
-			}
-			else
-			{
-				newBrain.neurons[i].source[j] = parentNeuron.source[j];
-			}
-			//copy the weight
-			if(withModification && irandom(100) < 5)
-			{
-				newBrain.neurons[i] = random_range(-1,1);
-			}
-			else
-			{
-				newBrain.neurons[i].weight[j] = parentNeuron.weight[j];
+				//copy the source
+				if(withModification && irandom(100) < 2)
+				{
+					newBrain.neurons[i].source[j] = irandom_range(0,array_length(parent.brain.neurons)-1);
+				}
+				else
+				{
+					newBrain.neurons[i].source[j] = parentNeuron.source[j];
+				}
+				//copy the weight
+				if(withModification && irandom(100) < 5)
+				{
+					newBrain.neurons[i] = random_range(-1,1);
+				}
+				else
+				{
+					newBrain.neurons[i].weight[j] = parentNeuron.weight[j];
+				}
 			}
 		}
+	}
+	catch( _exception)
+	{
+	    show_debug_message(_exception.message);
+	    show_debug_message(_exception.longMessage);
+	    show_debug_message(_exception.script);
+	    show_debug_message(_exception.stacktrace);
 	}
 	return newBrain;
 }
