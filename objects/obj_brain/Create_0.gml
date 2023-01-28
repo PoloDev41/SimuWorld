@@ -17,6 +17,7 @@ function RunBrain(being, fruit)
 	newX = being.x + move;
 	if(newX > 0 && newX < obj_world.world_width)
 		being.x = newX;
+	being.energie -= (move + array_length(neuron));
 		
 	neuron = neurons[1];
 	var sum = neuron[0] * (fruit.x - being.x);
@@ -29,4 +30,5 @@ function RunBrain(being, fruit)
 	newY = being.y + move;
 	if(newY > 0 && newY < obj_world.world_height)
 		being.y = newY;
+	being.energie -= (move + array_length(neuron));
 }
