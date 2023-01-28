@@ -12,15 +12,22 @@ neurons[3].weight =  [random_range(-1,1), random_range(-1,1)];
 
 function RunBrain(being, fruit)
 {
-	neurons[0].output = (fruit.x - being.x);
-	neurons[1].output = (fruit.y - being.y);
+	if(fruit != noone)
+	{
+		neurons[0].output = (fruit.x - being.x);
+		neurons[1].output = (fruit.y - being.y);
+	}
+	else
+	{
+		neurons[0].output = 0;
+		neurons[1].output = 0;
+	}
 	
 	for(var i = 2; i < array_length(neurons); i++){
 		neurons[i].RunNeurone(id);
 	}
 	
-	sum = neurons[2].output;
-	
+	sum = neurons[array_length(neurons)-2].output;
 	move = 0;
 	if(sum > 0)
 		move++;
@@ -31,7 +38,7 @@ function RunBrain(being, fruit)
 		being.x = newX;
 	being.energie -= abs(move);
 		
-	sum = neurons[3].output;
+	sum = neurons[array_length(neurons)-1].output;
 	move = 0;
 	if(sum > 0)
 		move++;

@@ -5,5 +5,5 @@ var number = instance_number(obj_being);
 if(number > 0)
 {
 	var first = instance_find(obj_being,0);
-	draw_text(0, -20, "energie: " + string(first.energie) + "    being: " + string(number));
+	draw_text(0, -20, "energie: " + string(first.energie) + "  being: " + string(number) + "  life: " + string(first.lifetime) + "  generation: " + string(first.generation));
 }
