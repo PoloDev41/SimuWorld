@@ -12,6 +12,10 @@ for(i = 0; i < 10; i++)
 						"Instances", obj_being);
 }
 
-instance_create_layer(random_range(0, world_width),
-						random_range(0, world_height),
-						"Instances", obj_fruit);
+for(i = 0; i < 2; i++)
+{
+
+	instance_create_layer(random_range(0, world_width),
+							random_range(0, world_height),
+							"Instances", obj_fruit);
+}
