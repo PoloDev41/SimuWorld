@@ -12,7 +12,7 @@ for(i = 0; i < 10; i++)
 						"Instances", obj_being);
 }
 
-for(i = 0; i < 2; i++)
+for(i = 0; i < 3; i++)
 {
 
 	instance_create_layer(random_range(0, world_width),
