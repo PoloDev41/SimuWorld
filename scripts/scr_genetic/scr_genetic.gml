@@ -34,11 +34,8 @@ function scr_cloneBrain(parent, withModification){
 			array_push(newBrain.neurons, newNeuron);
 		}
 		
-		show_debug_message("state of the new brain");
-		show_debug_message("number of neurons: " + string(array_length(newBrain.neurons)));
-		
 		//create a new neuron
-		if(withModification && irandom(100) < 100)
+		if(withModification && irandom(100) < 2)
 		{
 			neuron = new Neuron();
 			var nbrNeurons = array_length(newBrain.neurons);
