@@ -1,32 +1,66 @@
 function scr_cloneBrain(parent, withModification){
-	var newBrain = instance_create_layer(0,0,0,obj_brain);
+	newBrain = new Brain(true);
 	
 	try{
 		
-		for(i = 2; i < array_length(parent.brain.neurons); i++)
+		for(i = 0; i < array_length(parent.brain.neurons); i++)
 		{
 			parentNeuron = parent.brain.neurons[i];
+			newNeuron = new Neuron();
+			newNeuron.receptor = parentNeuron.receptor;
+			newNeuron.action = parentNeuron.action;
+			
 			for(j = 0; j < array_length(parentNeuron.source); j++)
 			{
 				//copy the source
 				if(withModification && irandom(100) < 2)
 				{
-					newBrain.neurons[i].source[j] = irandom_range(0,array_length(parent.brain.neurons)-1);
+					newNeuron.source[j] = irandom_range(0,array_length(parent.brain.neurons)-1);
 				}
 				else
 				{
-					newBrain.neurons[i].source[j] = parentNeuron.source[j];
+					newNeuron.source[j] = parentNeuron.source[j];
 				}
 				//copy the weight
 				if(withModification && irandom(100) < 5)
 				{
-					newBrain.neurons[i] = random_range(-1,1);
+					newNeuron.weight[j] = random_range(-1,1);
 				}
 				else
 				{
-					newBrain.neurons[i].weight[j] = parentNeuron.weight[j];
+					newNeuron.weight[j] = parentNeuron.weight[j];
 				}
 			}
+			array_push(newBrain.neurons, newNeuron);
+		}
+		
+		//create a new neuron
+		if(withModification && irandom(100) < 2)
+		{
+			neuron = new Neuron();
+			var nbrNeurons = array_length(newBrain.neurons);
+			//the new neuron create connection to the others
+			var nbrInput = irandom_range(1,3);
+			for(i = 0; i < nbrInput; i++)
+			{
+				neuron.source[i] = irandom(nbrNeurons);
+				neuron.weight[i] = random_range(-1,1);
+			}
+			//the "others" try to connect to it
+			var nbrConnection = irandom(nbrNeurons-1);
+			for(i = 0; i < nbrConnection; i++)
+			{
+				n = newBrain.neurons[irandom(nbrNeurons-1)];
+				
+				//if source = 0, it means, it's a input neuron, don't connect
+				if(n.source != noone && array_length(n.source) > 0)
+				{
+					array_push(n.source, nbrNeurons);
+					array_push(n.weight, random_range(-1,1));
+				}				
+			}
+				
+			array_push(newBrain.neurons, neuron);
 		}
 	}
 	catch( _exception)

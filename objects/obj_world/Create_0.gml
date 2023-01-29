@@ -21,3 +21,5 @@ for(i = 0; i < 10; i++)
 							random_range(0, world_height),
 							"Instances", obj_fruit);
 }
+
+show_debug_message("creation done");
