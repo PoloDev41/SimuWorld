@@ -15,7 +15,7 @@ if(lifetime > 5)
 		energie -= (ENERGIE_EGG_GENERATION/2);
 		var e = instance_create_layer(x, y, "Instances", obj_egg,
 		{
-		    energie : 100,
+		    energie : 200,
 		});
 		e.brain = scr_cloneBrain(id, true);
 		e.generation = generation +1;
