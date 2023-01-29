@@ -7,29 +7,59 @@ function scr_cloneBrain(parent, withModification){
 		{
 			parentNeuron = parent.brain.neurons[i];
 			newNeuron = new Neuron();
-			newNeuron.receptor = parentNeuron.receptor;
-			newNeuron.action = parentNeuron.action;
+			if(withModification && irandom(100) < 2)
+			{
+				//do nothing (remove the receptor)
+			}
+			else
+			{
+				newNeuron.receptor = parentNeuron.receptor;
+			}	
+			if(withModification && irandom(100) < 2)
+			{
+				//do nothing (remove the action)
+			}
+			else
+			{
+				newNeuron.action = parentNeuron.action;
+			}	
 			
 			for(j = 0; j < array_length(parentNeuron.source); j++)
 			{
-				//copy the source
 				if(withModification && irandom(100) < 2)
 				{
-					newNeuron.source[j] = irandom_range(0,array_length(parent.brain.neurons)-1);
+					//do nothing (remove the connection)
 				}
 				else
 				{
-					newNeuron.source[j] = parentNeuron.source[j];
+					//copy the source
+					if(withModification && irandom(100) < 2)
+					{
+						newNeuron.source[j] = irandom(array_length(parent.brain.neurons)-1);
+					}
+					else
+					{
+						newNeuron.source[j] = parentNeuron.source[j];
+					}
+					//copy the weight
+					if(withModification && irandom(100) < 5)
+					{
+						if(withModification && irandom(100) < 50)
+							newNeuron.weight[j] = random_range(-1,1);
+						else
+							newNeuron.weight[j] = parentNeuron.weight[j] + random_range(-1,1);
+					}
+					else
+					{
+						newNeuron.weight[j] = parentNeuron.weight[j];
+					}
 				}
-				//copy the weight
-				if(withModification && irandom(100) < 5)
-				{
-					newNeuron.weight[j] = random_range(-1,1);
-				}
-				else
-				{
-					newNeuron.weight[j] = parentNeuron.weight[j];
-				}
+			}
+			//create a new connection
+			if(withModification && irandom(100) < 2)
+			{
+				newNeuron.source[array_length(newNeuron.source)] = irandom(array_length(parent.brain.neurons)-1);
+				newNeuron.weight[array_length(newNeuron.weight)] = random_range(-1,1);
 			}
 			array_push(newBrain.neurons, newNeuron);
 		}
@@ -40,12 +70,41 @@ function scr_cloneBrain(parent, withModification){
 			neuron = new Neuron();
 			var nbrNeurons = array_length(newBrain.neurons);
 			//the new neuron create connection to the others
-			var nbrInput = irandom_range(1,3);
-			for(i = 0; i < nbrInput; i++)
+			var nbrInput = irandom(3);
+			if(nbrInput == 0)
 			{
-				neuron.source[i] = irandom(nbrNeurons);
-				neuron.weight[i] = random_range(-1,1);
+				//no input, take an input neuron
+				if(irandom(100) < 50)
+				{
+					receptor = scr_inputNeuron_NearestX;
+				}
+				else
+				{
+					receptor = scr_inputNeuron_NearestY;
+				}
 			}
+			else
+			{
+				for(i = 0; i < nbrInput; i++)
+				{
+					neuron.source[i] = irandom(nbrNeurons);
+					neuron.weight[i] = random_range(-1,1);
+				}
+				
+				if(irandom(100) < 10)
+				{
+					//add action
+					if(irandom(100) < 50)
+					{
+						action = scr_actionNeuron_MoveX;
+					}
+					else
+					{
+						action = scr_actionNeuron_MoveY;
+					}
+				}
+			}
+
 			//the "others" try to connect to it
 			var nbrConnection = irandom(nbrNeurons-1);
 			for(i = 0; i < nbrConnection; i++)
