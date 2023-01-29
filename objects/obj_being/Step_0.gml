@@ -2,9 +2,8 @@ lifetime++;
 
 if(lifetime > 5)
 {
-	var obj = instance_nearest(x, y, obj_fruit);
-
-	brain.RunBrain(id, obj);
+	brain.RunBrain(id, instance_find(obj_world,0));
+	
 	energie -= lifetime/1000;
 
 	if(energie <= 0)
