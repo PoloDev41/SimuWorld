@@ -1,6 +1,6 @@
 lifetime++;
 
-if(lifetime >= 80)
+if(lifetime >= 65)
 {
 	lifetime = 0;
 	instance_create_layer(random_range(0, obj_world.world_width),

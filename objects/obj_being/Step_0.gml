@@ -2,9 +2,8 @@ lifetime++;
 
 if(lifetime > 5)
 {
-	var obj = instance_nearest(x, y, obj_fruit);
-
-	brain.RunBrain(id, obj);
+	brain.RunBrain(id, instance_find(obj_world,0));
+	
 	energie -= lifetime/1000;
 
 	if(energie <= 0)
@@ -16,7 +15,7 @@ if(lifetime > 5)
 		energie -= (ENERGIE_EGG_GENERATION/2);
 		var e = instance_create_layer(x, y, "Instances", obj_egg,
 		{
-		    energie : 100,
+		    energie : 200,
 		});
 		e.brain = scr_cloneBrain(id, true);
 		e.generation = generation +1;
