@@ -23,3 +23,21 @@ for(i = 0; i < 10; i++)
 }
 
 show_debug_message("creation done");
+
+cellSize = 20;
+noise_map = scr_perlinNoise2d()
+
+// Création d'une surface pour stocker l'image
+surface_map = surface_create(world_width, world_height);
+surface_set_target(surface_map);
+// Boucle pour dessiner les valeurs de bruit de Perlin 2D à l'écran
+for (var i = 0; i < world_width/cellSize; i++) {
+    for (var j = 0; j < world_height/cellSize; j++) {
+		var color = make_color_rgb(noise_map[i][j] * 255, noise_map[i][j] * 255, noise_map[i][j] * 255);
+		draw_set_colour(color);
+		// Remplissage de la surface avec la couleur
+        draw_rectangle(i * cellSize, j * cellSize, (i + cellSize) * cellSize, (j + cellSize) * cellSize, false);
+    }
+}
+// Redirection du rendu vers l'écran
+surface_reset_target();

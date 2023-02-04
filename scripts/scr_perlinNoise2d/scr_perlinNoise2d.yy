@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "scr_actionNeuron",
+  "name": "scr_perlinNoise2d",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
